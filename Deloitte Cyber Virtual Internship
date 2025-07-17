@@ -1,0 +1,54 @@
+Here is your task
+In this task you will be joining our cyber security team. Your job is to:
+
+Determine if the alleged breach could have happened from an attacker on the internet directly (i.e. no access to Daikibo's VPN).
+Inspect a web_requests.log file (listing only data from a period when the alleged attack has to have happened):
+Try to spot suspicious requests
+Hint: In the Resources section, you can find a diagram example of how to read the logs file
+Hint: Look for longer sequences of user requests
+Hint: Notice the order of requests from Login → to requests for the dashboard page's resources (styles, scripts, images, etc.) → to API requests for the actual statuses of the machines
+Hint: How would you recognise if an automated request to the API happens at an exact interval of time (assume no such functionality is available in the dashboard)?
+If you've identified such requests make sure to write down the ID of the user (it's part of the requests)
+Here is how the web_requests.log file is structured:
+
+There is a sequence of blocks of text divided by empty lines
+Each block represents the activity of a unique IP address (no 2 blocks have the same IP)
+The block starts with the IP address followed by a table of the requests made to Daikibo's telemetry dashboard (the dashboard lives in Daikibo's intranet) by the device with this IP address, sorted by time
+The IP addresses are from the internal Daikibo network and are static
+1 block can represent 1 or multiple browsing sessions
+Sessions made on different dates require new logins
+There is no continuous polling/pushing of data between client and server - the users need to refresh the page to get the latest data
+Hint: For an easier visual inspection, open up the file in a code editor like Sublime Text or Visual Studio Code, expand the window to the full width of your screen and decrease font size until no text breaks on a new line
+When you believe you have completed the 2 tasks above, submit your work by taking a quick quiz to check your discoveries. Start the quiz by clicking 'Start your quiz' below. Good luck!
+
+----------------------------------------------------------------------
+
+🧠 Blue Team Mindset: Detection Over Exploitation
+Unlike red teaming, where you’re the attacker, blue teaming is all about defense — detecting threats, mitigating them, and preserving the integrity of systems. In this case, I stepped into the shoes of a SOC analyst: scouring logs, recognizing behavioral patterns, and isolating the threat vector before the damage escalates.
+
+Think of it as a tactical blend of:
+
+🕵️‍♂️ Log analysis
+🔐 Authentication flow review
+🧮 Anomaly detection
+🚫 Access control verification
+The key? Pattern recognition — and I was on it.
+
+----------------------------------------------------------------------
+
+🚨 Suspicious User Detected:
+User ID: dBCm2JjBU815PB8zPDvKqv
+
+💡 Here’s What Gave It Away:
+✅ Logged in like everyone else. Nothing unusual at first.
+
+🤔 Then, a sequence of automated API requests began — hitting all factory endpoints.
+⏱️ The pattern? Punctual. Every hour. On the dot. No frontend elements were requested — no styles, no scripts, no human browsing indicators.
+🤖 This was no human. This was scripted access — silent, persistent, and efficient.
+
+----------------------------------------------
+❓Q1: Can an attacker reach the dashboard directly from the internet?
+🟢 Answer: No. The dashboard lives behind a VPN-only internal intranet. No direct access from external IPs — unless someone on the inside lets you in.
+
+❓Q2: Who triggered the breach behavior?
+🟢 Answer: dBCm2JjBU815PB8zPDvKqv The only user displaying machine-like querying frequency, accessing factory endpoints without UI resource calls.
