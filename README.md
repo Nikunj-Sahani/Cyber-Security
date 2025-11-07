@@ -1,6 +1,6 @@
 # Cyber-Security
 You can get Cyber Security notes and help here.
 
-Follow us on Instagram - Hacker_Insights
+Follow us on Instagram - 
 
-Follow and Dm on Linkedin - Nikunj Kumar Sahani
+Follow and Dm on Linkedin - 
